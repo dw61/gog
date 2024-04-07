@@ -1,0 +1,20 @@
+{
+  "name": "map",
+  "version": "1.0.0",
+  "description": "javascript of the map, using @vis.gl/react-google-maps, react, vite",
+  "main": "map.jsx",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build -w"
+  },
+  "author": "dw61",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@vis.gl/react-google-maps": "^0.8.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.3"
+  }
+}
