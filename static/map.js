@@ -8457,18 +8457,17 @@ const apartments = [
     lease_month: {
       nan: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "2,1",
     rent_per_person: 1050,
     tags: [
-      "roommate not required to apply",
-      "car traffic",
-      "outside-unit laundry",
-      "too old",
-      "slow response"
+      "comfortable temperature",
+      "traffic noise",
+      "good room",
+      "slow management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0320539,
     lng: -78.5089406,
     count: 1
@@ -8476,62 +8475,55 @@ const apartments = [
   {
     street_address: "1000 W Main St",
     lease_month: {
-      nan: 2
+      October: 1,
+      December: 1,
+      July: 1
     },
-    security_deposit: "> monthly rent",
-    bed_toilet: "2,2;1,1",
-    rent_per_person: 1300,
+    security_deposit: "large security deposit",
+    bed_toilet: "4,4;2,2;1,1",
+    rent_per_person: 1075,
     tags: [
-      "parties",
-      "train",
-      "expensive lease termination",
-      "too expensive",
-      "roommate not required to apply",
-      "train"
+      "comfortable temperature",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "good room",
+      "good apartment",
+      "comfortable temperature",
+      "train noise",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 4,
-    comment: "Helicopter in the hospital is more noisy than the train",
-    lat: 38.0320091,
-    lng: -78.4955291,
-    count: 2
+    comment: "no comments yet\n\nno comments yet\n\nHelicopter in the hospital is more noisy than the train",
+    lat: 38.0323477,
+    lng: -78.4952169,
+    count: 3
   },
   {
     street_address: "102 Shamrock Rd",
     lease_month: {
-      nan: 3
+      May: 1,
+      December: 1,
+      November: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "2,1;1,1",
     rent_per_person: 975,
     tags: [
-      "roommate not required to apply",
-      "too old",
-      "slow response",
-      "slow maintenance",
-      "expensive lease termination",
-      "good deal",
-      "roommate not required to apply",
-      "too hot",
-      "parties",
-      "car traffic",
-      "train",
-      "roommate",
-      "outside-unit laundry",
-      "lost package",
-      "feel unsafe",
-      "too old",
-      "far from class",
-      "slow response",
-      "slow maintenance",
-      "good deal",
-      "roommate not required to apply",
-      "train",
-      "outside-unit laundry",
-      "too old",
-      "slow maintenance"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "apartment too old",
+      "gets too hot",
+      "good room",
+      "comfortable temperature",
+      "train noise"
     ],
     rating: 2.7,
-    comment: "Lots of bugs at first, but they could be managed. Worst yet, they still haven’t returned my security deposit! \n\nnewer furnishment\n",
+    comment: "Lots of bugs at first, but they could be managed. Worst yet, they still haven’t returned my security deposit! \n\nno comments yet\n\nnewer furnishment\n",
     lat: 38.0271627,
     lng: -78.5104864,
     count: 3
@@ -8539,18 +8531,19 @@ const apartments = [
   {
     street_address: "1029 Wertland St",
     lease_month: {
-      nan: 1
+      March: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "3,2",
     rent_per_person: 900,
     tags: [
-      "too cold",
-      "parties",
-      "far from class"
+      "gets too cold",
+      "party noise",
+      "good room",
+      "good management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0352579,
     lng: -78.4953501,
     count: 1
@@ -8558,21 +8551,25 @@ const apartments = [
   {
     street_address: "104 Stadium Rd",
     lease_month: {
-      nan: 2
+      August: 1,
+      December: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,3",
     rent_per_person: 850,
     tags: [
-      "good deal",
-      "too hot",
-      "too old",
-      "car traffic",
-      "roommate",
-      "too old"
+      "gets too hot",
+      "quiet place",
+      "good room",
+      "apartment too old",
+      "good management",
+      "comfortable temperature",
+      "good room",
+      "apartment too old",
+      "good management"
     ],
     rating: 3.5,
-    comment: "This house has great location but is just a little too old. It does not have AC the second floor and I have to use a heater, which can attract roaches during winter",
+    comment: "This house has great location but is just a little too old. It does not have AC the second floor and I have to use a heater, which can attract roaches during winter\n\nno comments yet",
     lat: 38.0317539,
     lng: -78.5084225,
     count: 2
@@ -8580,36 +8577,76 @@ const apartments = [
   {
     street_address: "106 Montebello Cir",
     lease_month: {
-      nan: 3
+      September: 1,
+      December: 1,
+      March: 1,
+      November: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,4",
     rent_per_person: 875,
     tags: [
-      "good deal",
-      "spotty wifi",
-      "mold",
-      ""
+      "gets too cold",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "mold in room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 5,
-    comment: "Get good roommates!",
+    comment: "no comments yet\n\nno comments yet\n\nGet good roommates!\n\nno comments yet",
     lat: 38.0290828,
     lng: -78.5098872,
-    count: 3
+    count: 4
+  },
+  {
+    street_address: "140 Valley Rd",
+    lease_month: {
+      September: 1
+    },
+    security_deposit: "one monthly rent deposit",
+    bed_toilet: "3,2",
+    rent_per_person: 667,
+    tags: [
+      "gets too hot",
+      "train noise",
+      "apartment too old"
+    ],
+    rating: 3,
+    comment: "no comments yet",
+    lat: 38.0292952,
+    lng: -78.5074904,
+    count: 1
   },
   {
     street_address: "142 Yellowstone Dr",
     lease_month: {
-      nan: 1
+      December: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "4,4",
     rent_per_person: 600,
     tags: [
-      "lost package"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.016885,
     lng: -78.521789,
     count: 1
@@ -8617,19 +8654,18 @@ const apartments = [
   {
     street_address: "167 Yellowstone Dr",
     lease_month: {
-      nan: 1
+      December: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "2,2",
     rent_per_person: 600,
     tags: [
-      "good deal",
-      "far from class",
-      "slow response",
-      "slow maintenance"
+      "comfortable temperature",
+      "quiet place",
+      "good room"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0174144,
     lng: -78.5213782,
     count: 1
@@ -8637,16 +8673,17 @@ const apartments = [
   {
     street_address: "1718 Jefferson Park Ave",
     lease_month: {
-      nan: 1
+      July: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,3",
     rent_per_person: 700,
     tags: [
-      "parties"
+      "comfortable temperature",
+      "party noise"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0292813,
     lng: -78.5090114,
     count: 1
@@ -8654,18 +8691,14 @@ const apartments = [
   {
     street_address: "1720 Treetop Dr",
     lease_month: {
-      nan: 1
+      September: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "3,3",
     rent_per_person: 800,
     tags: [
-      "train",
-      "roommate",
-      "lost package",
-      "far from class",
-      "slow maintenance",
-      "expensive lease termination"
+      "comfortable temperature",
+      "good room"
     ],
     rating: 4,
     comment: "apartment is nice but management is not always helpful or responsive, and they raised rent a lot between my first and second year I’ve been here. Also walls are thin and can hear the apartment next door sometimes. I also wish I had known that depending on your specific apartment number the rent differs. Mine is more expensive than a friend’s.",
@@ -8676,26 +8709,33 @@ const apartments = [
   {
     street_address: "1725 Jefferson Park Ave",
     lease_month: {
-      nan: 4
+      April: 2,
+      December: 1,
+      May: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,4",
     rent_per_person: 875,
     tags: [
-      "good deal",
-      "car traffic",
-      "fire alarm",
-      "roommate",
-      "thin wall",
-      "mold",
-      "lost package",
-      "good deal",
-      "slow maintenance",
-      "parties",
-      ""
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "mold in room",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 4.8,
-    comment: "Noise was an issue. Theft once in a while for packages too.\n\npretty good in general, slow maintenance",
+    comment: "no comments yet\n\nNoise was an issue. Theft once in a while for packages too.\n\nno comments yet\n\npretty good in general, slow maintenance",
     lat: 38.0295418,
     lng: -78.5095765,
     count: 4
@@ -8703,27 +8743,30 @@ const apartments = [
   {
     street_address: "1800 Jefferson Park Ave",
     lease_month: {
-      nan: 4
+      March: 2,
+      October: 1,
+      February: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "2,1;1,1",
     rent_per_person: 800,
     tags: [
-      "good deal",
-      "too cold",
-      "too dark",
-      "mold",
-      "outside-unit laundry",
-      "too old",
-      "parties",
-      "lost package",
-      "far from class",
-      "roommate not required to apply",
-      "outside-unit laundry",
-      ""
+      "gets too cold",
+      "quiet place",
+      "good management",
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management",
+      "comfortable temperature",
+      "good room"
     ],
     rating: 4.2,
-    comment: "",
+    comment: "no comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet",
     lat: 38.028004,
     lng: -78.5084153,
     count: 4
@@ -8731,22 +8774,25 @@ const apartments = [
   {
     street_address: "1801 Lambeth Ln",
     lease_month: {
-      nan: 2
+      January: 1,
+      December: 1
     },
-    security_deposit: "0",
+    security_deposit: "no security deposit",
     bed_toilet: "2,1",
     rent_per_person: 1062,
     tags: [
-      "roommate not required to apply",
-      "parties",
-      "too dark",
-      "good deal",
-      "roommate not required to apply",
-      "parties",
-      "too dark"
+      "can apply without roommate",
+      "comfortable temperature",
+      "party noise",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "party noise",
+      "good apartment",
+      "good management"
     ],
     rating: 3.5,
-    comment: "apartment could be better",
+    comment: "apartment could be better\n\nno comments yet",
     lat: 38.0410423,
     lng: -78.5017084,
     count: 2
@@ -8754,48 +8800,58 @@ const apartments = [
   {
     street_address: "1819 Jefferson Park Ave",
     lease_month: {
-      nan: 2
+      October: 1,
+      August: 1,
+      November: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,2",
     rent_per_person: 950,
     tags: [
-      "good deal",
-      "roommate not required to apply",
-      "too hot",
-      "parties",
-      "thin wall",
-      "lost package",
-      "slow response",
-      "slow maintenance",
-      "too expensive",
-      "too dark",
-      "lost package",
-      "too old",
-      "slow maintenance"
+      "comfortable temperature",
+      "good room",
+      "good apartment",
+      "gets too hot",
+      "comfortable temperature",
+      "quiet place"
     ],
-    rating: 3.5,
-    comment: "the air-conditioning is not efficient and electricity is expensive ($80-90 per person over the winter)",
+    rating: 4,
+    comment: "no comments yet\n\nno comments yet\n\nthe air-conditioning is not efficient and electricity is expensive ($80-90 per person over the winter)",
     lat: 38.0282096,
     lng: -78.511092,
-    count: 2
+    count: 3
+  },
+  {
+    street_address: "1821 Jefferson Park Ave",
+    lease_month: {
+      October: 1
+    },
+    security_deposit: "small security deposit",
+    bed_toilet: "1,1",
+    rent_per_person: 1300,
+    tags: [
+      "can apply without roommate",
+      "comfortable temperature",
+      "traffic noise",
+      "good room",
+      "good management"
+    ],
+    rating: 5,
+    comment: "The exact scale and interior of the apartment was unknown to me before moving. It was a lot bigger than expected. ",
+    lat: 38.0279937,
+    lng: -78.5113328,
+    count: 1
   },
   {
     street_address: "1904 Jefferson Park Ave",
     lease_month: {
-      nan: 1
+      December: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "2,1",
     rent_per_person: 475,
     tags: [
-      "car traffic",
-      "roommate",
-      "outside-unit laundry",
-      "lost package",
-      "feel unsafe",
-      "too old",
-      "slow response"
+      "slow management"
     ],
     rating: 3,
     comment: "This apartment doesn't have cameras in the buildings, so packages get lost and the leasing office can't do anything about it. Also this apartment does not allow pets, but people still get pets anyway disregarding the rules. ",
@@ -8806,45 +8862,65 @@ const apartments = [
   {
     street_address: "1912 Lewis Mountain Rd",
     lease_month: {
-      nan: 1
+      October: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "3,3",
     rent_per_person: 1e3,
     tags: [
-      ""
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0374881,
     lng: -78.508744,
     count: 1
   },
   {
+    street_address: "1912 Stadium Rd",
+    lease_month: {
+      December: 1
+    },
+    security_deposit: "one monthly rent deposit",
+    bed_toilet: "7,3",
+    rent_per_person: 375,
+    tags: [
+      "gets too cold",
+      "apartment too old"
+    ],
+    rating: 2,
+    comment: "no comments yet",
+    lat: 38.0288308,
+    lng: -78.5138485,
+    count: 1
+  },
+  {
     street_address: "2006 Jefferson Park Ave",
     lease_month: {
-      nan: 3
+      May: 1,
+      December: 2
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "3,2",
     rent_per_person: 800,
     tags: [
-      "train",
-      "lost package",
-      "far from class",
-      "expensive lease termination",
-      "good deal",
-      "train",
-      "parties",
-      "car traffic",
-      "train",
-      "roommate",
-      "lost package",
-      "far from class",
-      "expensive lease termination"
+      "comfortable temperature",
+      "train noise",
+      "good room",
+      "comfortable temperature",
+      "train noise",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "good room"
     ],
     rating: 3.3,
-    comment: "DO NOT ship expensive stuffs from/to this apartment. Kids living in this community stole my package twice in a year.",
+    comment: "DO NOT ship expensive stuffs from/to this apartment. Kids living in this community stole my package twice in a year.\n\nno comments yet\n\nno comments yet",
     lat: 38.0262558,
     lng: -78.5130829,
     count: 3
@@ -8852,17 +8928,19 @@ const apartments = [
   {
     street_address: "2006 Stadium Rd",
     lease_month: {
-      nan: 1
+      November: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "1,1",
     rent_per_person: 950,
     tags: [
-      "roommate not required to apply",
-      "outside-unit laundry"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.028198,
     lng: -78.5151911,
     count: 1
@@ -8870,16 +8948,20 @@ const apartments = [
   {
     street_address: "2101 Arlington Blvd",
     lease_month: {
-      nan: 1
+      March: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "2,2",
     rent_per_person: 1125,
     tags: [
-      "too expensive"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0498742,
     lng: -78.5065141,
     count: 1
@@ -8887,53 +8969,71 @@ const apartments = [
   {
     street_address: "2101 Jefferson Park Ave",
     lease_month: {
-      nan: 4
+      July: 2,
+      November: 2
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "4,2",
     rent_per_person: 762,
     tags: [
-      "good deal",
-      "spotty wifi",
-      "far from class",
-      "too cold",
-      "parties",
-      "car traffic",
-      "spotty wifi",
-      "far from class"
+      "comfortable temperature",
+      "quiet place",
+      "good management",
+      "gets too cold",
+      "party noise",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "traffic noise",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management"
     ],
     rating: 4.5,
-    comment: "I wish I had known that my roommate next door subleased his room to some other dude… before I moved in…\n\nlonger walk to class than i expected",
+    comment: "I wish I had known that my roommate next door subleased his room to some other dude… before I moved in…\n\nno comments yet\n\nno comments yet\n\nlonger walk to class than i expected",
     lat: 38.0265709,
     lng: -78.5138371,
     count: 4
   },
   {
+    street_address: "218 15th St NW",
+    lease_month: {
+      September: 1
+    },
+    security_deposit: "one monthly rent deposit",
+    bed_toilet: "4,3",
+    rent_per_person: 125,
+    tags: [
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good apartment",
+      "good management"
+    ],
+    rating: 5,
+    comment: "Greenhouse is a great building an operated through CBS rentals. The apartments are spatious, laundry is in-unit, and each unit comes with 1 parking spot. ",
+    lat: 38.0356976,
+    lng: -78.4993896,
+    count: 1
+  },
+  {
     street_address: "22904 NEWCOMB HALL",
     lease_month: {
-      nan: 1
+      May: 1
     },
-    security_deposit: "0",
+    security_deposit: "no security deposit",
     bed_toilet: "10,3",
     rent_per_person: 900,
     tags: [
-      "too expensive",
-      "roommate not required to apply",
-      "too cold",
-      "parties",
-      "car traffic",
-      "fire alarm",
-      "spotty wifi",
-      "bad smell",
-      "too dark",
-      "mold",
-      "difficult laundry",
-      "lost package",
-      "too old",
-      "slow response"
+      "gets too cold",
+      "slow management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0340277,
     lng: -78.510016,
     count: 1
@@ -8941,55 +9041,61 @@ const apartments = [
   {
     street_address: "2302 Price Ave",
     lease_month: {
-      nan: 1
+      May: 1
     },
-    security_deposit: "> monthly rent",
+    security_deposit: "large security deposit",
     bed_toilet: "4,4",
     rent_per_person: 750,
     tags: [
-      "parties",
-      "roommate",
-      "bugs",
-      "lost package",
-      "far from class",
-      "slow response"
+      "comfortable temperature",
+      "bugs in room",
+      "slow management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0269542,
     lng: -78.5168554,
     count: 1
   },
   {
+    street_address: "2715 S Norfolk St",
+    lease_month: {
+      September: 2
+    },
+    security_deposit: "small security deposit",
+    bed_toilet: "2,2",
+    rent_per_person: 1850,
+    tags: [
+      "quiet place",
+      "good room",
+      "good management"
+    ],
+    rating: 3.5,
+    comment: "location could be better, not walking friendly\n\nutility bill is more expensive than expected (and what the leasing office claimed)\nheat insulation sucks, too hot in summer and too cold in winter\npromised EV charger to be setup, not done after 7 months",
+    lat: 37.5490558,
+    lng: -122.2860791,
+    count: 2
+  },
+  {
     street_address: "300 Montebello Cir",
     lease_month: {
-      nan: 3
+      March: 1,
+      January: 1,
+      October: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "4,4",
     rent_per_person: 800,
     tags: [
-      "roommate not required to apply",
-      "parties",
-      "thin wall",
-      "too old",
-      "expensive lease termination",
-      "parties",
-      "outside-unit laundry",
-      "lost package",
-      "too old",
-      "good deal",
-      "roommate not required to apply",
-      "parties",
-      "fire alarm",
-      "bad smell",
-      "difficult laundry",
-      "too old",
-      "slow response",
-      "slow maintenance"
+      "comfortable temperature",
+      "apartment too old",
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "comfortable temperature"
     ],
     rating: 2.7,
-    comment: "That woodard would be an absolute POS of a business",
+    comment: "That woodard would be an absolute POS of a business\n\nno comments yet\n\nno comments yet",
     lat: 38.0294392,
     lng: -78.5103976,
     count: 3
@@ -8997,40 +9103,53 @@ const apartments = [
   {
     street_address: "301 15th St NW",
     lease_month: {
-      nan: 2
+      October: 3,
+      December: 1,
+      September: 1
     },
-    security_deposit: "monthly rent",
-    bed_toilet: "1,1;2,2",
-    rent_per_person: 1e3,
+    security_deposit: "small security deposit",
+    bed_toilet: "4,4;1,1;2,2",
+    rent_per_person: 1200,
     tags: [
-      "parties",
-      "train",
-      "fire alarm",
-      "slow response",
-      "slow maintenance",
-      "train"
+      "gets too hot",
+      "mold in room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good apartment",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management",
+      "comfortable temperature",
+      "good room",
+      "good apartment",
+      "comfortable temperature",
+      "train noise",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet",
     lat: 38.0370113,
     lng: -78.4997976,
-    count: 2
+    count: 5
   },
   {
     street_address: "313 13th St NW",
     lease_month: {
-      nan: 1
+      July: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "2,1",
     rent_per_person: 975,
     tags: [
-      "good deal",
-      "roommate",
-      "spotty wifi",
-      "outside-unit laundry",
-      "lost package",
-      "feel unsafe"
+      "comfortable temperature",
+      "roommate noise",
+      "good management"
     ],
     rating: 3,
     comment: "I knew what I was getting into given the limited options but I don't feel particularly safe where I am surprisingly. I really dislike that we don't have laundry in unit and we have to pay $2 per load when they don't even wash the clothes well or dry them enough. It's gross in the laundry room and half the time the quarter slots do not even work. I think the parking situation is stupid. There shouldn't be assigned spots so people shouldn't be towing each other. The walls are think. No overhead lighting in the main room. ",
@@ -9039,41 +9158,95 @@ const apartments = [
     count: 1
   },
   {
+    street_address: "416 Monroe Ln",
+    lease_month: {
+      October: 2
+    },
+    security_deposit: "one monthly rent deposit",
+    bed_toilet: "4,2",
+    rent_per_person: 975,
+    tags: [
+      "comfortable temperature",
+      "bugs in room",
+      "good management",
+      "bugs in room",
+      "apartment too old",
+      "good management"
+    ],
+    rating: 4,
+    comment: "no comments yet\n\nno comments yet",
+    lat: 38.0313794,
+    lng: -78.5025293,
+    count: 2
+  },
+  {
     street_address: "429 Monroe Ln",
     lease_month: {
-      nan: 4
+      November: 1,
+      December: 2,
+      February: 1
     },
-    security_deposit: "> monthly rent",
+    security_deposit: "large security deposit",
     bed_toilet: "3,3;4,4",
     rent_per_person: 850,
     tags: [
-      "parties",
-      "thin wall",
-      "lost package",
-      "good deal",
-      "too cold",
-      "parties",
-      "lost package",
-      "fire alarm",
-      "good deal",
-      "parties"
+      "comfortable temperature",
+      "good room",
+      "good management",
+      "gets too cold",
+      "party noise",
+      "good room",
+      "good management",
+      "comfortable temperature",
+      "fire alarm noise",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 4.2,
-    comment: "",
+    comment: "no comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet",
     lat: 38.0309554,
     lng: -78.5033588,
     count: 4
   },
   {
+    street_address: "450 N Mathilda Ave",
+    lease_month: {
+      November: 1
+    },
+    security_deposit: "small security deposit",
+    bed_toilet: "1,1",
+    rent_per_person: 2725,
+    tags: [
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management"
+    ],
+    rating: 4,
+    comment: "no comments yet",
+    lat: 37.3869302,
+    lng: -122.0291259,
+    count: 1
+  },
+  {
     street_address: "524 Valley Rd",
     lease_month: {
-      nan: 1
+      August: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "7,3",
     rent_per_person: 775,
     tags: [
-      "too dark"
+      "comfortable temperature",
+      "quiet place",
+      "good apartment",
+      "good management"
     ],
     rating: 5,
     comment: "I wish I knew there’re stairs. I broke my ankle when helping my friends move in:(",
@@ -9084,18 +9257,19 @@ const apartments = [
   {
     street_address: "611 Rugby Rd",
     lease_month: {
-      nan: 1
+      December: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "1,1",
     rent_per_person: 1275,
     tags: [
-      "good deal",
-      "roommate not required to apply",
-      "outside-unit laundry"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0429586,
     lng: -78.5001903,
     count: 1
@@ -9103,16 +9277,16 @@ const apartments = [
   {
     street_address: "775 Alderman Rd",
     lease_month: {
-      nan: 1
+      May: 1
     },
-    security_deposit: "0",
+    security_deposit: "no security deposit",
     bed_toilet: "5,4",
     rent_per_person: 700,
     tags: [
-      "roommate not required to apply",
-      "parties",
-      "difficult laundry",
-      "too old"
+      "comfortable temperature",
+      "party noise",
+      "good room",
+      "good management"
     ],
     rating: 3,
     comment: "too old, motel",
@@ -9123,16 +9297,20 @@ const apartments = [
   {
     street_address: "814 Cabell Ave",
     lease_month: {
-      nan: 1
+      March: 1
     },
-    security_deposit: "monthly rent",
+    security_deposit: "one monthly rent deposit",
     bed_toilet: "2,2",
     rent_per_person: 750,
     tags: [
-      "good deal"
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management"
     ],
     rating: 5,
-    comment: "",
+    comment: "no comments yet",
     lat: 38.0429617,
     lng: -78.4945737,
     count: 1
@@ -9140,31 +9318,40 @@ const apartments = [
   {
     street_address: "852 W Main St",
     lease_month: {
-      nan: 6
+      January: 1,
+      December: 2,
+      March: 1,
+      October: 1,
+      August: 1
     },
-    security_deposit: "0",
+    security_deposit: "no security deposit",
     bed_toilet: "2,2;1,1;4,4",
     rent_per_person: 1238,
     tags: [
-      "roommate not required to apply",
-      "parties",
-      "train",
-      "far from class",
-      "slow response",
-      "roommate not required to apply",
-      "",
-      "too expensive",
-      "spotty wifi",
-      "far from class",
-      "slow maintenance",
-      "train",
-      "spotty wifi",
-      "far from class",
-      "slow maintenance",
-      "too dark"
+      "comfortable temperature",
+      "good room",
+      "slow management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "comfortable temperature",
+      "train noise",
+      "comfortable temperature",
+      "quiet place",
+      "good apartment",
+      "good management"
     ],
     rating: 4,
-    comment: "The room is allocated randomly, so you do not know which room you will live in until you move in. There might be risk that the room will be in a noisy location, or have bad view.",
+    comment: "no comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet\n\nThe room is allocated randomly, so you do not know which room you will live in until you move in. There might be risk that the room will be in a noisy location, or have bad view.",
     lat: 38.0320149,
     lng: -78.4933344,
     count: 6
@@ -9172,56 +9359,66 @@ const apartments = [
   {
     street_address: "853 W Main St",
     lease_month: {
-      nan: 2
+      June: 1,
+      February: 1,
+      August: 1
     },
-    security_deposit: "> monthly rent",
+    security_deposit: "large security deposit",
     bed_toilet: "4,4;3,3",
-    rent_per_person: 1088,
+    rent_per_person: 1150,
     tags: [
-      "too expensive",
-      "roommate not required to apply",
-      "fire alarm",
-      "roommate",
-      "spotty wifi",
-      "slow response",
-      "slow maintenance",
-      "expensive lease termination",
-      "too expensive",
-      "parties",
-      "too dark",
-      "expensive lease termination"
+      "can apply without roommate",
+      "roommate noise",
+      "good room",
+      "comfortable temperature",
+      "good apartment",
+      "comfortable temperature",
+      "party noise",
+      "good apartment"
     ],
-    rating: 2.5,
-    comment: "management is too agressive, not helpful\n\nSome of my friends are charged with expensive cost when they move out because of trivial problems. Also the room space is too small considering the rent",
+    rating: 2,
+    comment: "How much they were going to charge and how bad they are with very general things.\n\nmanagement is too agressive, not helpful\n\nSome of my friends are charged with expensive cost when they move out because of trivial problems. Also the room space is too small considering the rent",
     lat: 38.0327768,
     lng: -78.493227,
-    count: 2
+    count: 3
   },
   {
     street_address: "Charlottesville VA",
     lease_month: {
-      nan: 5
+      October: 1,
+      December: 2,
+      March: 1,
+      August: 1
     },
-    security_deposit: "< monthly rent",
+    security_deposit: "small security deposit",
     bed_toilet: "2,2;2,1;1,5",
     rent_per_person: 1e3,
     tags: [
-      "roommate not required to apply",
-      "parties",
-      "car traffic",
-      "train",
-      "good deal",
-      "roommate not required to apply",
-      "train",
-      "outside-unit laundry",
-      "too old",
-      "too cold",
-      "too expensive",
-      "roommate not required to apply",
-      "bad smell"
+      "comfortable temperature",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "train noise",
+      "good room",
+      "good management",
+      "gets too cold",
+      "quiet place",
+      "good room",
+      "good apartment",
+      "good management",
+      "comfortable temperature",
+      "quiet place",
+      "good apartment",
+      "good management"
     ],
     rating: 4,
-    comment: "",
+    comment: "no comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet\n\nno comments yet",
     lat: 38.0293059,
     lng: -78.4766781,
     count: 5
@@ -9234,7 +9431,7 @@ function Highlight({ apartment }) {
   document.body.appendChild(script);
   return /* @__PURE__ */ React.createElement("div", { className: "fixed lg:bottom-4 lg:right-4 lg:top-4 sm:left-4 sm:right-4 sm:bottom-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs font-sans" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-baseline" }, /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-semibold" }, "$", apartment.rent_per_person), /* @__PURE__ */ React.createElement("span", { className: "text-lg text-red-500 font-semibold" }, "☆ ", apartment.rating, "(", apartment.count, ")")), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-orange-100 rounded-full px-2 py-1" }, apartment.street_address), /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-blue-100 rounded-full px-2 py-1" }, "bedrooms,toilets ", apartment.bed_toilet)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, apartment.tags.map(
     (tag) => /* @__PURE__ */ React.createElement("span", { className: "text-green-700 bg-green-100 rounded-full px-2 py-1" }, tag)
-  )), /* @__PURE__ */ React.createElement("div", { className: "border-t border-gray-200 mt-3 pt-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2" }, "Comments"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-gray-600" }, apartment.comment)), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("div", { className: "bottom-0 w-full text-center text-sm", "data-fillout-id": "x29P9cvL4wus", "data-fillout-embed-type": "popup", "data-fillout-button-text": "review my apartment", "data-fillout-button-size": "small", "data-fillout-inherit-parameters": true }));
+  )), /* @__PURE__ */ React.createElement("div", { className: "border-t border-gray-200 mt-3 pt-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2" }, "Good to know"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-gray-600" }, apartment.comment)), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("div", { className: "bottom-0 w-full text-center text-sm", "data-fillout-id": "x29P9cvL4wus", "data-fillout-embed-type": "popup", "data-fillout-button-text": "review my apartment", "data-fillout-button-size": "small", "data-fillout-inherit-parameters": true }));
 }
 function Marker({ apartment, setApartment }) {
   return /* @__PURE__ */ React.createElement(

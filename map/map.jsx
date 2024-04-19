@@ -36,7 +36,7 @@ function Highlight({ apartment }) {
         </span> */}
       </div>
       <div className="border-t border-gray-200 mt-3 pt-2">
-        <p className="text-xs mb-2">Comments</p>
+        <p className="text-xs mb-2">Good to know</p>
         <p className="text-xs text-gray-600">{apartment.comment}</p>
       </div>
       <br></br>
