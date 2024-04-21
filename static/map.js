@@ -9424,49 +9424,100 @@ const apartments = [
     count: 5
   }
 ];
-function Highlight({ apartment }) {
+function Highlight(props) {
   const script = document.createElement("script");
   script.src = "https://server.fillout.com/embed/v1/";
   script.async = true;
   document.body.appendChild(script);
-  return /* @__PURE__ */ React.createElement("div", { className: "fixed lg:bottom-4 lg:right-4 lg:top-4 sm:left-4 sm:right-4 sm:bottom-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs font-sans" }, /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-baseline" }, /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-semibold" }, "$", apartment.rent_per_person), /* @__PURE__ */ React.createElement("span", { className: "text-lg text-red-500 font-semibold" }, "☆ ", apartment.rating, "(", apartment.count, ")")), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-orange-100 rounded-full px-2 py-1" }, apartment.street_address), /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-blue-100 rounded-full px-2 py-1" }, "bedrooms,toilets ", apartment.bed_toilet)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, apartment.tags.map(
-    (tag) => /* @__PURE__ */ React.createElement("span", { className: "text-green-700 bg-green-100 rounded-full px-2 py-1" }, tag)
-  )), /* @__PURE__ */ React.createElement("div", { className: "border-t border-gray-200 mt-3 pt-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2" }, "Good to know"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-gray-600" }, apartment.comment)), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("div", { className: "bottom-0 w-full text-center text-sm", "data-fillout-id": "x29P9cvL4wus", "data-fillout-embed-type": "popup", "data-fillout-button-text": "review my apartment", "data-fillout-button-size": "small", "data-fillout-inherit-parameters": true }));
+  return /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      onMouseOver: () => {
+        props.setShowHighlight(true);
+      },
+      onMouseOut: () => {
+        props.setShowHighlight(false);
+      },
+      className: "fixed lg:bottom-4 lg:right-4 lg:top-4 sm:left-4 sm:right-4 sm:bottom-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs font-sans"
+    },
+    /* @__PURE__ */ React.createElement("div", { className: "flex justify-between items-baseline" }, /* @__PURE__ */ React.createElement("h2", { className: "text-2xl font-semibold" }, "$", props.apartment.rent_per_person), /* @__PURE__ */ React.createElement("span", { className: "text-lg text-red-500 font-semibold" }, "☆ ", props.apartment.rating, "(", props.apartment.count, ")")),
+    /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-orange-100 rounded-full px-2 py-1" }, props.apartment.street_address), /* @__PURE__ */ React.createElement("span", { className: "text-gray-700 bg-blue-100 rounded-full px-2 py-1" }, "bedrooms,toilets ", props.apartment.bed_toilet)),
+    /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-2 text-xs font-semibold" }, props.apartment.tags.map(
+      (tag) => /* @__PURE__ */ React.createElement("span", { className: "text-green-700 bg-green-100 rounded-full px-2 py-1" }, tag)
+    )),
+    /* @__PURE__ */ React.createElement("div", { className: "border-t border-gray-200 mt-3 pt-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2" }, "Good to know"), /* @__PURE__ */ React.createElement("p", { className: "text-xs text-gray-600" }, props.apartment.comment)),
+    /* @__PURE__ */ React.createElement("br", null),
+    /* @__PURE__ */ React.createElement("div", { className: "bottom-0 w-full text-center text-sm", "data-fillout-id": "x29P9cvL4wus", "data-fillout-embed-type": "popup", "data-fillout-button-text": "review my apartment", "data-fillout-button-size": "small", "data-fillout-inherit-parameters": true })
+  );
 }
-function Marker({ apartment, setApartment }) {
+function Marker(props) {
   return /* @__PURE__ */ React.createElement(
     AdvancedMarker,
     {
-      position: { "lat": apartment.lat, "lng": apartment.lng },
-      onClick: () => setApartment(apartment)
+      position: { "lat": props.apartment.lat, "lng": props.apartment.lng },
+      onClick: () => void 0
     },
     /* @__PURE__ */ React.createElement(
       "span",
       {
-        className: "property text-base px-2 pt-1.5 pb-1 bg-emerald-100 rounded-full border border-black",
-        onMouseOver: () => setApartment(apartment)
+        className: "\n        property text-base px-2 pt-1.5 pb-1 bg-emerald-100 rounded-full border border-black\n        hover:bg-gray-800 hover:text-white\n        ",
+        onPointerOver: () => {
+          props.setApartment(props.apartment);
+          props.setShowHighlight(true);
+        },
+        onMouseOut: () => {
+          props.setShowHighlight(false);
+        },
+        onTouchEnd: (event) => {
+          event.stopPropagation();
+        },
+        onGestureChange: (event) => {
+          console.log(event);
+        }
       },
       "$",
-      apartment.rent_per_person
+      props.apartment.rent_per_person
     )
   );
 }
 function App() {
   let [apartment, setApartment] = reactExports.useState(apartments[1]);
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Highlight, { apartment }), /* @__PURE__ */ React.createElement(APIProvider, { apiKey: "AIzaSyCyRQ3xTOLkHkgLjqwg9rCtrgoWcRpzOJA" }, /* @__PURE__ */ React.createElement(
-    Map$1,
+  let [showHighlight, setShowHighlight] = reactExports.useState(false);
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, showHighlight && /* @__PURE__ */ React.createElement(
+    Highlight,
     {
-      style: { height: "100vh" },
-      defaultCenter: { lat: 38.034, lng: -78.507 },
-      mapId: "9c2a7d18fe4584e5",
-      defaultZoom: 15,
-      gestureHandling: "greedy",
-      isFractionalZoomEnabled: true,
-      scaleControl: true,
-      disableDefaultUI: true
+      apartment,
+      setShowHighlight
+    }
+  ), /* @__PURE__ */ React.createElement(APIProvider, { apiKey: "AIzaSyCyRQ3xTOLkHkgLjqwg9rCtrgoWcRpzOJA" }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      onTouchEnd: () => {
+        setShowHighlight(false);
+      }
     },
-    apartments.map(
-      (apartment2) => /* @__PURE__ */ React.createElement(Marker, { apartment: apartment2, setApartment })
+    /* @__PURE__ */ React.createElement(
+      Map$1,
+      {
+        style: { height: "100vh" },
+        defaultCenter: { lat: 38.034, lng: -78.507 },
+        mapId: "9c2a7d18fe4584e5",
+        defaultZoom: 15,
+        gestureHandling: "greedy",
+        isFractionalZoomEnabled: true,
+        scaleControl: true,
+        disableDefaultUI: true
+      },
+      apartments.map(
+        (apartment2) => /* @__PURE__ */ React.createElement(
+          Marker,
+          {
+            apartment: apartment2,
+            setApartment,
+            setShowHighlight
+          }
+        )
+      )
     )
   )));
 }
