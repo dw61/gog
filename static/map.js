@@ -8652,6 +8652,23 @@ const apartments = [
     count: 1
   },
   {
+    street_address: "1513 Virginia Ave",
+    lease_month: {
+      October: 1
+    },
+    security_deposit: "one monthly rent deposit",
+    bed_toilet: "4,2",
+    rent_per_person: 800,
+    tags: [
+      "comfortable temperature"
+    ],
+    rating: 4,
+    comment: "There is very few parking spots -parking was always an issue. They issued 20 passes but there were only 11 spots & no street parking. Oh, and they give your security deposit back, in full, to one person. So if you don’t have nice roommates, they’re not obligated to give you your share. Management only responds to you if it’s convenient for them. There are much better places to live for a better value that is close enough to the school. ",
+    lat: 38.0385591,
+    lng: -78.4990612,
+    count: 1
+  },
+  {
     street_address: "167 Yellowstone Dr",
     lease_month: {
       December: 1
@@ -8943,6 +8960,25 @@ const apartments = [
     comment: "no comments yet",
     lat: 38.028198,
     lng: -78.5151911,
+    count: 1
+  },
+  {
+    street_address: "210 Montebello Cir",
+    lease_month: {
+      September: 1
+    },
+    security_deposit: "small security deposit",
+    bed_toilet: "4,2",
+    rent_per_person: 500,
+    tags: [
+      "comfortable temperature",
+      "roommate noise",
+      "good management"
+    ],
+    rating: 4,
+    comment: "no comments yet",
+    lat: 38.0302909,
+    lng: -78.5093102,
     count: 1
   },
   {
