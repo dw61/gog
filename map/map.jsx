@@ -56,7 +56,10 @@ function Marker(props) {
   return (
     <AdvancedMarker
       position={{ "lat": props.apartment.lat, "lng": props.apartment.lng }}
-      onClick={() => undefined}
+      onClick={() => {
+        props.setApartment(props.apartment);
+        props.setShowHighlight(true);
+      }}
     >
       <span
         className="
