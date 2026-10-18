@@ -4,21 +4,21 @@ import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import apartments from "../static/apartments.json"
 
 function Highlight(props) {
-
-  const script = document.createElement('script');
-  script.src = 'https://server.fillout.com/embed/v1/';
-  script.async = true;
-  document.body.appendChild(script);
-
   return (
     <div
-      onMouseOver={() => {
-        props.setShowHighlight(true)
-      }}
-      onMouseOut={() => {
-        props.setShowHighlight(false)
-      }}
-      className="fixed lg:bottom-4 lg:right-4 lg:top-4 sm:left-4 sm:right-4 sm:bottom-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs font-sans">
+      role="region"
+      aria-label="Apartment details"
+      className="fixed bottom-4 right-4 left-4 lg:left-auto lg:top-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs overflow-y-auto font-sans">
+      <div className="flex justify-end mb-2">
+        <button
+          type="button"
+          onClick={() => props.setShowHighlight(false)}
+          aria-label="Close apartment details"
+          className="px-2 py-1 rounded-lg hover:bg-gray-100 focus-visible:outline-2"
+        >
+          Close &times;
+        </button>
+      </div>
       <div className="flex justify-between items-baseline">
         <h2 className="text-2xl font-semibold">${props.apartment.rent_per_person}</h2>
         <span className="text-lg text-red-500 font-semibold">&#9734; {props.apartment.rating}({props.apartment.count})</span>
@@ -35,8 +35,8 @@ function Highlight(props) {
         </span> */}
       </div>
       <div className="flex flex-wrap gap-2 mt-2 text-xs font-semibold">
-        {props.apartment.tags.map(tag =>
-          <span className="text-green-700 bg-green-100 rounded-full px-2 py-1">{tag}</span>
+        {props.apartment.tags.map((tag, index) =>
+          <span key={`${tag}-${index}`} className="text-green-700 bg-green-100 rounded-full px-2 py-1">{tag}</span>
         )}
         {/* <span className="text-blue-700 bg-blue-100 rounded-full px-2 py-1">
           On premise parking: $50-$100 per month
@@ -47,7 +47,11 @@ function Highlight(props) {
         <p className="text-xs text-gray-600">{props.apartment.comment}</p>
       </div>
       <br />
-      <div className="bottom-0 w-full text-center text-sm" data-fillout-id="x29P9cvL4wus" data-fillout-embed-type="popup" data-fillout-button-text="review my apartment" data-fillout-button-size="small" data-fillout-inherit-parameters></div>
+      <div className="w-full text-center text-sm">
+        <a href="/review/" className="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 focus-visible:outline-2">
+          review my apartment
+        </a>
+      </div>
     </div>
   );
 };
@@ -66,18 +70,9 @@ function Marker(props) {
         property text-base px-2 pt-1.5 pb-1 bg-emerald-100 rounded-full border border-black
         hover:bg-gray-800 hover:text-white
         "
-        onPointerOver={() => {
+        onPointerEnter={() => {
           props.setApartment(props.apartment);
           props.setShowHighlight(true)
-        }}
-        onMouseOut={() => {
-          props.setShowHighlight(false)
-        }}
-        onTouchEnd={(event) => {
-          event.stopPropagation(); // don't bubble up to the Map component
-        }}
-        onGestureChange={(event) => {
-          console.log(event)
         }}
       >
         ${props.apartment.rent_per_person}
@@ -99,11 +94,7 @@ function App() {
           setShowHighlight={setShowHighlight}
         />}
       <APIProvider apiKey={"AIzaSyCyRQ3xTOLkHkgLjqwg9rCtrgoWcRpzOJA"}>
-        <div
-          onTouchEnd={() => {
-            setShowHighlight(false) // hide Highlight component when mobile user touches Map
-          }}
-        >
+        <div>
           <Map
             style={{ height: '100vh' }}
             defaultCenter={{ lat: 38.034, lng: -78.507 }}
@@ -117,6 +108,7 @@ function App() {
             {
               apartments.map(apartment =>
                 <Marker
+                  key={`${apartment.lat},${apartment.lng}`}
                   apartment={apartment}
                   setApartment={setApartment}
                   setShowHighlight={setShowHighlight}
