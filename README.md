@@ -21,9 +21,11 @@ notebooks, and repository files are excluded. The old Flask templates and
 ## GitHub Pages
 
 In repository Settings → Pages, select **GitHub Actions** as the source. The
-workflow builds pull requests and deploys pushes to `main`. Hosting a public
-Pages website from a private repository requires an eligible paid GitHub plan.
-Do not change repository visibility to enable hosting.
+workflow builds pull requests and deploys pushes to `main`. This repository is
+public so GitHub Pages can host it on the free plan. All tracked source files
+and commit history are also publicly accessible on GitHub. Only `dist/` is
+published as the website. Hosting from a private repository instead requires an
+eligible paid GitHub plan.
 
 Configure the custom domain as `getoffgrounds.com` in Settings → Pages before
 changing DNS. For a workflow deployment, the Pages setting controls the domain;
