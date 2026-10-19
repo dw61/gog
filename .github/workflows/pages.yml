@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      inspect_schema:
+        description: Check question IDs and labels without fetching answers or publishing
+        type: boolean
+        default: false
   schedule:
     # Offset from the hour to avoid the busiest scheduler window.
     - cron: '7,17,27,37,47,57 * * * *'
@@ -55,12 +60,18 @@ jobs:
           fi
       - name: Fetch and validate completed reviews
         id: sync
-        if: steps.connection.outputs.available == 'true'
+        if: steps.connection.outputs.available == 'true' && !inputs.inspect_schema
         env:
           FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
         run: python scripts/sync_fillout.py
+      - name: Inspect public form structure only
+        if: steps.connection.outputs.available == 'true' && inputs.inspect_schema
+        env:
+          FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
+        run: python scripts/sync_fillout.py --inspect-schema
       - name: Decide whether to publish
         id: publish
+        if: '!inputs.inspect_schema'
         env:
           EVENT_NAME: ${{ github.event_name }}
           DATA_CHANGED: ${{ steps.sync.outputs.changed }}

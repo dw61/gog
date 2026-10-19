@@ -1,5 +1,8 @@
 import copy
+from contextlib import redirect_stdout
+import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -7,7 +10,7 @@ from unittest.mock import patch
 
 from scripts.sync_fillout import (
     FIELDS, SyncError, address_key, fetch_submissions, json_bytes,
-    resolve_fields, sync, transform,
+    main, resolve_fields, sync, transform,
 )
 
 
@@ -138,6 +141,21 @@ class SyncTest(unittest.TestCase):
         self.assertFalse(self.run_sync()[0])
         self.assertEqual(first, [path.read_bytes() for path in self.paths])
         self.assertEqual(json.loads(self.paths[0].read_text())["field_ids"], FIELD_IDS)
+
+    def test_schema_inspection_never_fetches_answers_or_logs_private_metadata(self):
+        (self.root / "config").mkdir()
+        (self.root / "config/fillout.json").write_bytes(json_bytes(CONFIG))
+        metadata = copy.deepcopy(METADATA)
+        metadata["private"] = "private-metadata"
+        metadata["questions"][0]["private"] = "private-question-property"
+        output = io.StringIO()
+        with patch("sys.argv", ["sync_fillout.py", "--root", str(self.root), "--inspect-schema"]), patch.dict(os.environ, {"FILLOUT_API_KEY": "test-private-key"}), patch("scripts.sync_fillout.request_json", return_value=metadata) as request, redirect_stdout(output):
+            main()
+        request.assert_called_once_with("/forms/test-form", "test-private-key")
+        parsed = json.loads(output.getvalue())
+        self.assertTrue(all(set(q) == {"id", "name", "type"} for q in parsed))
+        self.assertNotIn("private-", output.getvalue())
+        self.assertFalse(self.paths[2].exists())
 
     def test_full_fetch_applies_deletions_and_no_partial_fetch_overwrites(self):
         self.run_sync()

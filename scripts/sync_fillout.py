@@ -21,7 +21,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
-API = "https://api.fillout.com/v1/api"
+API = "https://api.zite.com/v1/api"
 FIELDS = {
     "address": "What is the street address of your apartment?",
     "month": "Which month did you sign your lease?",
@@ -319,10 +319,20 @@ def sync(config_path, buildings_path, data_path, status_path, get):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--inspect-schema", action="store_true", help="Print question IDs, labels, and types only; do not fetch answers or publish.")
     args = parser.parse_args()
     key = os.environ.get("FILLOUT_API_KEY", "").strip()
     if not key:
         raise SyncError("Set the private FILLOUT_API_KEY GitHub Actions secret first.")
+    if args.inspect_schema:
+        config = json.loads((args.root / "config/fillout.json").read_text())
+        metadata = request_json(f"/forms/{config['form_id']}", key)
+        if not isinstance(metadata, dict) or not isinstance(metadata.get("questions"), list):
+            raise SyncError("Unexpected Fillout form format.")
+        # Only public form structure is useful for mapping. Never log the raw
+        # metadata object, which may acquire private properties in future APIs.
+        print(json_bytes([{k: question.get(k) for k in ("id", "name", "type")} for question in metadata["questions"]]).decode())
+        return
     changed, status, pending = sync(args.root / "config/fillout.json", args.root / "config/buildings.json", args.root / "static/apartments.json", args.root / "static/data-status.json", lambda path: request_json(path, key))
     summary = f"Published reviews: {status['published_reviews']}. Held for review: {status['pending_reviews']}. Data changed: {str(changed).lower()}."
     print(summary)

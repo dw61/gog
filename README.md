@@ -18,6 +18,12 @@ separately from the date the map data was updated.
 4. After verifying the first sync, add the repository **variable**
    `FILLOUT_SYNC_ENABLED` with value `true` to enable scheduled runs.
 
+Use the API key from the **Forms API** section of Developer settings. This
+account's current base URL is `https://api.zite.com/v1/api`. If questions were
+renamed before the first connection, run the workflow with **inspect_schema**
+selected to list question IDs, labels, and types without fetching answers or
+deploying. Use those IDs in `config/fillout.json` to connect the correct fields.
+
 The schedule requests a run every 10 minutes, plus build/deploy time. GitHub can
 delay scheduled jobs and disables schedules in public repositories after 60 days
 without repository activity. This is periodic publishing, not an instant update
