@@ -29,12 +29,14 @@ function Highlight(props) {
         <span className="text-gray-700 bg-orange-100 rounded-full px-2 py-1">
           {props.apartment.street_address}
         </span>
-        <span className="text-gray-700 bg-blue-100 rounded-full px-2 py-1">
-          bedrooms,toilets {props.apartment.bed_toilet}
-        </span>
-        {/* <span className="text-gray-700 bg-gray-100 rounded-full px-2 py-1">
-          2 toilets
-        </span> */}
+        {props.apartment.bed_toilet.split(";").map(layout => {
+          const [bedrooms, bathrooms] = layout.split(",");
+          return (
+            <span key={layout} className="text-gray-700 bg-blue-100 rounded-full px-2 py-1">
+              {bedrooms} {Number(bedrooms) === 1 ? "bedroom" : "bedrooms"} / {bathrooms} {Number(bathrooms) === 1 ? "bathroom" : "bathrooms"}
+            </span>
+          );
+        })}
       </div>
       <div className="flex flex-wrap gap-2 mt-2 text-xs font-semibold">
         {props.apartment.tags.map((tag, index) =>
