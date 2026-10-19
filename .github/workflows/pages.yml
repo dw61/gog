@@ -44,7 +44,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check Fillout connection
         id: connection
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && (github.event_name != 'push' || vars.FILLOUT_SYNC_ENABLED == 'true')
         env:
           FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
           EVENT_NAME: ${{ github.event_name }}
