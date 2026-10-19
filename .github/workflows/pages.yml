@@ -12,8 +12,9 @@ on:
         type: boolean
         default: false
   schedule:
-    # Offset from the hour to avoid the busiest scheduler window.
-    - cron: '7,17,27,37,47,57 * * * *'
+    # Daily at 3:17 AM Pacific; avoid the busiest scheduler window on the hour.
+    - cron: '17 3 * * *'
+      timezone: America/Los_Angeles
 
 permissions:
   contents: read
@@ -44,7 +45,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check Fillout connection
         id: connection
-        if: github.event_name != 'pull_request' && (github.event_name != 'push' || vars.FILLOUT_SYNC_ENABLED == 'true')
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         env:
           FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
           EVENT_NAME: ${{ github.event_name }}
