@@ -2,8 +2,63 @@
 
 Static apartment-review map hosted with GitHub Pages. The map runs in the
 visitor's browser; Fillout handles review submissions. No Python server or EC2
-instance is needed. Apartment data remains a snapshot: new Fillout responses
-must be processed into `static/apartments.json` and committed to update the map.
+instance is needed. A GitHub Action fetches completed Fillout reviews, validates
+them, and publishes changes to the map. The page shows the latest review date
+separately from the date the map data was updated.
+
+## Connect Fillout once
+
+1. In Fillout account settings → Developer settings, copy an API key. Never
+   commit it or put it in browser code.
+2. In this repository's Settings → Secrets and variables → Actions, add the
+   repository **secret** `FILLOUT_API_KEY`.
+3. Run **Sync reviews and deploy GitHub Pages** manually from the Actions tab.
+   The first successful run saves the form's field IDs in `config/fillout.json`,
+   so renaming questions later does not disconnect their answers.
+4. After verifying the first sync, add the repository **variable**
+   `FILLOUT_SYNC_ENABLED` with value `true` to enable scheduled runs.
+
+The schedule requests a run every 10 minutes, plus build/deploy time. GitHub can
+delay scheduled jobs and disables schedules in public repositories after 60 days
+without repository activity. This is periodic publishing, not an instant update
+after submission. Manual runs also fetch the latest reviews. Visitors reload
+the page to see a new deployment. Unchanged scheduled runs do not commit or
+deploy. The API credential is only passed to the sync step on trusted main runs;
+pull requests run tests and build without it.
+
+`scripts/sync_fillout.py` fetches all completed, non-preview submissions, so edits
+and deletions are reflected. It deduplicates submission IDs, takes the median
+rent per person, averages available ratings, and removes repeated tags. Only
+the map's public fields are saved; submission IDs, login details, edit links,
+and raw API responses are not saved or logged. The source form and reviews
+must be intended for public publication. Obvious contact details in comments
+are held, but this is not a complete content moderation system.
+
+Reviews with invalid numbers, rent outside $200–$10,000 per person, or an unknown
+building are held. The workflow summary reports counts and reasons; inspect
+the actual answers privately in Fillout and correct them there when needed.
+Limits are configurable in `config/fillout.json`. To approve a new building,
+add its canonical street address and verified latitude/longitude to
+`config/buildings.json`; an optional `aliases` array handles alternate spellings.
+Only Charlottesville-area coordinates with a numbered street address qualify.
+New reviews at approved buildings publish automatically. A brand-new building
+needs this one-time map-pin approval. The existing browser Maps key cannot
+geocode server-side; the sync uses the approved address catalog and incurs no
+additional Google API charges.
+
+API errors, missing required fields, an empty result, or a sudden loss of more
+than 25% of published reviews stop the sync and preserve the previous website.
+Investigate the source/schema before intentionally replacing a large part of
+the dataset. Ordinary data changes are committed by the Action and deployed
+in the same workflow (GitHub does not trigger another push workflow for a
+commit made with its built-in token). Deployments are serialized, and a
+conflicting push stops publishing until the next run.
+
+Run the processing checks locally without credentials:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
 
 ## Build and preview
 
