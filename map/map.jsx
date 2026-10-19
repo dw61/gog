@@ -2,13 +2,6 @@ import React, { useState } from "react"
 import { createRoot } from "react-dom/client";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import apartments from "../static/apartments.json"
-import dataStatus from "../static/data-status.json"
-
-function dateLabel(value) {
-  return new Date(value).toLocaleDateString(undefined, {
-    year: "numeric", month: "short", day: "numeric", timeZone: "UTC"
-  });
-}
 
 function Highlight(props) {
   return (
@@ -97,14 +90,8 @@ function App() {
 
   return (
     <>
-      <aside className="fixed top-3 left-3 z-10 rounded-lg bg-white p-3 shadow-lg font-sans text-xs max-w-[220px]" aria-label="Review data freshness">
+      <aside className="fixed top-3 left-3 z-10 rounded-lg bg-white p-3 shadow-lg font-sans text-xs max-w-[220px]" aria-label="Site links">
         <p className="font-semibold">GetOffGrounds</p>
-        <p>Latest review: <time dateTime={dataStatus.latest_review_at}>{dateLabel(dataStatus.latest_review_at)}</time></p>
-        <p className="text-gray-600">
-          {dataStatus.source === "fillout" && dataStatus.published_at
-            ? <>Map updated: <time dateTime={dataStatus.published_at}>{dateLabel(dataStatus.published_at)}</time></>
-            : "Archived reviews · automatic sync pending"}
-        </p>
         <a href="/review/" className="inline-block mt-2 underline">Add your review</a>
       </aside>
       {showHighlight &&

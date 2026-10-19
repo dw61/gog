@@ -68,6 +68,8 @@ class ReviewsTest(unittest.TestCase):
             ({"rent": "NaN"}, "invalid_numbers"),
             ({"rent_basis": "something new"}, "invalid_rent_basis"),
             ({"address": "9 Unknown St"}, "unknown_address"),
+            ({"address": "   "}, "unknown_address"),
+            ({"address": {"address": "", "city": "Charlottesville"}}, "unknown_address"),
             ({"comment": "Email me at private@example.org"}, "comment_needs_review"),
             ({"comment": "Call 555-222-3333"}, "comment_needs_review"),
         ]
@@ -93,6 +95,20 @@ class ReviewsTest(unittest.TestCase):
         self.assertEqual(address_key("100 Stadium Road Apt 2\nCharlottesville VA"), "100 stadium rd")
         self.assertEqual(address_key("1800 JPA #4"), "1800 jefferson park ave")
         self.assertEqual(address_key("100 Stadium Rd, Apartment 2"), "100 stadium rd")
+
+    def test_live_address_components_publish_only_the_approved_building(self):
+        address = {"address": "100 Stadium Road Apt 2", "city": "Charlottesville", "state": "VA", "country": "United States", "zipCode": "22903"}
+        data, _, _ = self.process([submission(address=address)])
+        self.assertEqual(data[0]["street_address"], "100 Stadium Rd")
+        self.assertNotIn("Apt 2", json_bytes(data).decode())
+
+    def test_same_named_street_elsewhere_is_held(self):
+        for invalid in [{"city": "Richmond"}, {"state": "CA"}, {"country": "Canada"}, {"zipCode": "10001"}]:
+            address = {"address": "100 Stadium Road", "city": "Charlottesville", "state": "Virginia", "country": "US", "zipCode": "22903", **invalid}
+            with self.subTest(invalid=invalid):
+                data, _, pending = self.process([submission(), submission("elsewhere", address=address)])
+                self.assertEqual(data[0]["count"], 1)
+                self.assertEqual(pending, {"unknown_address": 1})
 
     def test_ids_survive_label_changes_and_missing_ids_fail(self):
         renamed = copy.deepcopy(METADATA)

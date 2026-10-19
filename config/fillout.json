@@ -2,5 +2,23 @@
   "form_id": "x29P9cvL4wus",
   "min_rent_per_person": 200,
   "max_rent_per_person": 10000,
-  "field_ids": {}
+  "field_ids": {
+    "address": "1icUrMii8YUWnjHoQWj8Wt",
+    "month": "iuQKhuEPT8tDhVBVHpz1bP",
+    "roommates": "eN8XcEds2Rp3BfPvZWGqBy",
+    "deposit": "2rExDCgD3AYe623nggr5J2",
+    "people": "vQSFykh1oBNEj9ekS38sZW",
+    "bedrooms": "fVpugSXV1HrEqz3fPEekKG",
+    "toilets": "t3w1nQRXUtGzEPLC14WCzY",
+    "rent": "jJbYCf2VW47T58fCGynXGT",
+    "rent_basis": "okaVVXeYnbyNDm25Eduuui",
+    "deal": "3HGb6TdbXEDNMp4ewkDaer",
+    "temperature": "dsjY5BsaMsUXhcg3d7GPeo",
+    "noise": "pC29EDUFQmRf8c9i4p9AvM",
+    "room": "29jakNgGJv96pyhRDep4jA",
+    "building": "8mUaSjNzakzi7PzcTvrJGm",
+    "management": "b8PKnanXQTamz6XRkYLqR1",
+    "rating": "j3LDCQjyCSS7E7aRVUNaDy",
+    "comment": "3BU1aBSs8CpmL8joY6YyoB"
+  }
 }

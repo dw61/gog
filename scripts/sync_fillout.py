@@ -21,7 +21,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
-API = "https://api.zite.com/v1/api"
+API = "https://api.fillout.com/v1/api"
 FIELDS = {
     "address": "What is the street address of your apartment?",
     "month": "Which month did you sign your lease?",
@@ -142,7 +142,7 @@ def resolve_fields(metadata, configured):
 
 
 def address_key(value):
-    if not isinstance(value, str):
+    if not isinstance(value, str) or not value.strip():
         return ""
     value = value.strip().splitlines()[0].split(",")[0].casefold()
     value = re.sub(r"\b(apt|apartment|unit|suite|ste)\b.*|#.*", "", value)
@@ -203,11 +203,24 @@ def review_values(submission, fields):
 
 
 def validate_review(values, buildings, config):
-    building = buildings.get(address_key(values.get("address")))
+    address_value = values.get("address")
+    if isinstance(address_value, dict):
+        # Fillout's Address question returns components, unlike the old CSV's
+        # combined text. Keep unit details out of the published building name.
+        street = address_value.get("address")
+        location = {k: re.sub(r"[^a-z]", "", label(address_value.get(k) or "")) for k in ("city", "state", "country")}
+        if location["city"] not in {"", "charlottesville", "cville", "charlottesvilleva", "charlottesvillevirginia"} or location["state"] not in {"", "va", "virginia", "usva"} or location["country"] not in {"", "us", "usa", "unitedstates", "unitedstatesofamerica"}:
+            raise SyncError("unknown_address")
+        postal = str(address_value.get("zipCode") or "").strip()
+        if postal and not re.fullmatch(r"229\d{2}(?:-\d{4})?", postal):
+            raise SyncError("unknown_address")
+    else:
+        street = address_value
+    building = buildings.get(address_key(street))
     if building is None:
         raise SyncError("unknown_address")
     # If a city is supplied, don't confuse a same-named street in another city.
-    address = label(values["address"])
+    address = label(street)
     if re.search(r"\b(san francisco|sunnyvale|norfolk|new york|los angeles)\b", address):
         raise SyncError("unknown_address")
     rent = number(values.get("rent"), 1, 100000)
