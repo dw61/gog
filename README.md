@@ -25,13 +25,16 @@ renamed before the first connection, run the workflow with **inspect_schema**
 selected to list question IDs, labels, and types without fetching answers or
 deploying. Use those IDs in `config/fillout.json` to connect the correct fields.
 
-The schedule requests a run every 10 minutes, plus build/deploy time. GitHub can
+The schedule requests one run each day at **3:17 AM America/Los_Angeles**,
+following Pacific daylight-saving changes, plus build/deploy time. GitHub can
 delay scheduled jobs and disables schedules in public repositories after 60 days
-without repository activity. This is periodic publishing, not an instant update
-after submission. Manual runs also fetch the latest reviews. Visitors reload
-the page to see a new deployment. Unchanged scheduled runs do not commit or
-deploy. The API credential is only passed to the sync step on trusted main runs;
-pull requests run tests and build without it.
+without repository activity. A new review normally appears after the next daily
+run, so allow up to about 24 hours plus publishing time. Manual runs also fetch
+the latest reviews. Code pushes deploy the existing review snapshot without
+fetching Fillout. Visitors reload the page to see a new deployment. Unchanged
+scheduled runs do not commit or deploy. The API credential is only passed to
+the sync step on scheduled or manual runs; pull requests run tests and build
+without it.
 
 `scripts/sync_fillout.py` fetches all completed, non-preview submissions, so edits
 and deletions are reflected. It deduplicates submission IDs, takes the median
