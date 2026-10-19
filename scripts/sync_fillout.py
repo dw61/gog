@@ -142,7 +142,7 @@ def resolve_fields(metadata, configured):
 
 
 def address_key(value):
-    if not isinstance(value, str):
+    if not isinstance(value, str) or not value.strip():
         return ""
     value = value.strip().splitlines()[0].split(",")[0].casefold()
     value = re.sub(r"\b(apt|apartment|unit|suite|ste)\b.*|#.*", "", value)
@@ -203,11 +203,24 @@ def review_values(submission, fields):
 
 
 def validate_review(values, buildings, config):
-    building = buildings.get(address_key(values.get("address")))
+    address_value = values.get("address")
+    if isinstance(address_value, dict):
+        # Fillout's Address question returns components, unlike the old CSV's
+        # combined text. Keep unit details out of the published building name.
+        street = address_value.get("address")
+        location = {k: re.sub(r"[^a-z]", "", label(address_value.get(k) or "")) for k in ("city", "state", "country")}
+        if location["city"] not in {"", "charlottesville", "cville", "charlottesvilleva", "charlottesvillevirginia"} or location["state"] not in {"", "va", "virginia", "usva"} or location["country"] not in {"", "us", "usa", "unitedstates", "unitedstatesofamerica"}:
+            raise SyncError("unknown_address")
+        postal = str(address_value.get("zipCode") or "").strip()
+        if postal and not re.fullmatch(r"229\d{2}(?:-\d{4})?", postal):
+            raise SyncError("unknown_address")
+    else:
+        street = address_value
+    building = buildings.get(address_key(street))
     if building is None:
         raise SyncError("unknown_address")
     # If a city is supplied, don't confuse a same-named street in another city.
-    address = label(values["address"])
+    address = label(street)
     if re.search(r"\b(san francisco|sunnyvale|norfolk|new york|los angeles)\b", address):
         raise SyncError("unknown_address")
     rent = number(values.get("rent"), 1, 100000)
@@ -319,10 +332,20 @@ def sync(config_path, buildings_path, data_path, status_path, get):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--inspect-schema", action="store_true", help="Print question IDs, labels, and types only; do not fetch answers or publish.")
     args = parser.parse_args()
     key = os.environ.get("FILLOUT_API_KEY", "").strip()
     if not key:
         raise SyncError("Set the private FILLOUT_API_KEY GitHub Actions secret first.")
+    if args.inspect_schema:
+        config = json.loads((args.root / "config/fillout.json").read_text())
+        metadata = request_json(f"/forms/{config['form_id']}", key)
+        if not isinstance(metadata, dict) or not isinstance(metadata.get("questions"), list):
+            raise SyncError("Unexpected Fillout form format.")
+        # Only public form structure is useful for mapping. Never log the raw
+        # metadata object, which may acquire private properties in future APIs.
+        print(json_bytes([{k: question.get(k) for k in ("id", "name", "type")} for question in metadata["questions"]]).decode())
+        return
     changed, status, pending = sync(args.root / "config/fillout.json", args.root / "config/buildings.json", args.root / "static/apartments.json", args.root / "static/data-status.json", lambda path: request_json(path, key))
     summary = f"Published reviews: {status['published_reviews']}. Held for review: {status['pending_reviews']}. Data changed: {str(changed).lower()}."
     print(summary)

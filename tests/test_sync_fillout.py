@@ -1,5 +1,8 @@
 import copy
+from contextlib import redirect_stdout
+import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -7,7 +10,7 @@ from unittest.mock import patch
 
 from scripts.sync_fillout import (
     FIELDS, SyncError, address_key, fetch_submissions, json_bytes,
-    resolve_fields, sync, transform,
+    main, resolve_fields, sync, transform,
 )
 
 
@@ -65,6 +68,8 @@ class ReviewsTest(unittest.TestCase):
             ({"rent": "NaN"}, "invalid_numbers"),
             ({"rent_basis": "something new"}, "invalid_rent_basis"),
             ({"address": "9 Unknown St"}, "unknown_address"),
+            ({"address": "   "}, "unknown_address"),
+            ({"address": {"address": "", "city": "Charlottesville"}}, "unknown_address"),
             ({"comment": "Email me at private@example.org"}, "comment_needs_review"),
             ({"comment": "Call 555-222-3333"}, "comment_needs_review"),
         ]
@@ -90,6 +95,20 @@ class ReviewsTest(unittest.TestCase):
         self.assertEqual(address_key("100 Stadium Road Apt 2\nCharlottesville VA"), "100 stadium rd")
         self.assertEqual(address_key("1800 JPA #4"), "1800 jefferson park ave")
         self.assertEqual(address_key("100 Stadium Rd, Apartment 2"), "100 stadium rd")
+
+    def test_live_address_components_publish_only_the_approved_building(self):
+        address = {"address": "100 Stadium Road Apt 2", "city": "Charlottesville", "state": "VA", "country": "United States", "zipCode": "22903"}
+        data, _, _ = self.process([submission(address=address)])
+        self.assertEqual(data[0]["street_address"], "100 Stadium Rd")
+        self.assertNotIn("Apt 2", json_bytes(data).decode())
+
+    def test_same_named_street_elsewhere_is_held(self):
+        for invalid in [{"city": "Richmond"}, {"state": "CA"}, {"country": "Canada"}, {"zipCode": "10001"}]:
+            address = {"address": "100 Stadium Road", "city": "Charlottesville", "state": "Virginia", "country": "US", "zipCode": "22903", **invalid}
+            with self.subTest(invalid=invalid):
+                data, _, pending = self.process([submission(), submission("elsewhere", address=address)])
+                self.assertEqual(data[0]["count"], 1)
+                self.assertEqual(pending, {"unknown_address": 1})
 
     def test_ids_survive_label_changes_and_missing_ids_fail(self):
         renamed = copy.deepcopy(METADATA)
@@ -138,6 +157,21 @@ class SyncTest(unittest.TestCase):
         self.assertFalse(self.run_sync()[0])
         self.assertEqual(first, [path.read_bytes() for path in self.paths])
         self.assertEqual(json.loads(self.paths[0].read_text())["field_ids"], FIELD_IDS)
+
+    def test_schema_inspection_never_fetches_answers_or_logs_private_metadata(self):
+        (self.root / "config").mkdir()
+        (self.root / "config/fillout.json").write_bytes(json_bytes(CONFIG))
+        metadata = copy.deepcopy(METADATA)
+        metadata["private"] = "private-metadata"
+        metadata["questions"][0]["private"] = "private-question-property"
+        output = io.StringIO()
+        with patch("sys.argv", ["sync_fillout.py", "--root", str(self.root), "--inspect-schema"]), patch.dict(os.environ, {"FILLOUT_API_KEY": "test-private-key"}), patch("scripts.sync_fillout.request_json", return_value=metadata) as request, redirect_stdout(output):
+            main()
+        request.assert_called_once_with("/forms/test-form", "test-private-key")
+        parsed = json.loads(output.getvalue())
+        self.assertTrue(all(set(q) == {"id", "name", "type"} for q in parsed))
+        self.assertNotIn("private-", output.getvalue())
+        self.assertFalse(self.paths[2].exists())
 
     def test_full_fetch_applies_deletions_and_no_partial_fetch_overwrites(self):
         self.run_sync()

@@ -3,8 +3,9 @@
 Static apartment-review map hosted with GitHub Pages. The map runs in the
 visitor's browser; Fillout handles review submissions. No Python server or EC2
 instance is needed. A GitHub Action fetches completed Fillout reviews, validates
-them, and publishes changes to the map. The page shows the latest review date
-separately from the date the map data was updated.
+them, and publishes changes to the map. Processing dates are recorded in
+`static/data-status.json`; review dates and sync status are not displayed on the
+public map.
 
 ## Connect Fillout once
 
@@ -17,6 +18,12 @@ separately from the date the map data was updated.
    so renaming questions later does not disconnect their answers.
 4. After verifying the first sync, add the repository **variable**
    `FILLOUT_SYNC_ENABLED` with value `true` to enable scheduled runs.
+
+Use the API key from the **Forms API** section of Developer settings. This
+form's verified base URL is `https://api.fillout.com/v1/api`. If questions were
+renamed before the first connection, run the workflow with **inspect_schema**
+selected to list question IDs, labels, and types without fetching answers or
+deploying. Use those IDs in `config/fillout.json` to connect the correct fields.
 
 The schedule requests a run every 10 minutes, plus build/deploy time. GitHub can
 delay scheduled jobs and disables schedules in public repositories after 60 days

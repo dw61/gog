@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      inspect_schema:
+        description: Check question IDs and labels without fetching answers or publishing
+        type: boolean
+        default: false
   schedule:
     # Offset from the hour to avoid the busiest scheduler window.
     - cron: '7,17,27,37,47,57 * * * *'
@@ -15,12 +20,12 @@ permissions:
 
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
     if: github.event_name != 'schedule' || vars.FILLOUT_SYNC_ENABLED == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: write
@@ -39,7 +44,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Check Fillout connection
         id: connection
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && (github.event_name != 'push' || vars.FILLOUT_SYNC_ENABLED == 'true')
         env:
           FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
           EVENT_NAME: ${{ github.event_name }}
@@ -55,12 +60,18 @@ jobs:
           fi
       - name: Fetch and validate completed reviews
         id: sync
-        if: steps.connection.outputs.available == 'true'
+        if: steps.connection.outputs.available == 'true' && !inputs.inspect_schema
         env:
           FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
         run: python scripts/sync_fillout.py
+      - name: Inspect public form structure only
+        if: steps.connection.outputs.available == 'true' && inputs.inspect_schema
+        env:
+          FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
+        run: python scripts/sync_fillout.py --inspect-schema
       - name: Decide whether to publish
         id: publish
+        if: '!inputs.inspect_schema'
         env:
           EVENT_NAME: ${{ github.event_name }}
           DATA_CHANGED: ${{ steps.sync.outputs.changed }}
@@ -96,7 +107,7 @@ jobs:
   deploy:
     if: github.event_name != 'pull_request' && needs.build.outputs.publish == 'true'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
