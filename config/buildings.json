@@ -1,0 +1,212 @@
+[
+  {
+    "street_address": "100 Stadium Rd",
+    "lat": 38.0320539,
+    "lng": -78.5089406
+  },
+  {
+    "street_address": "1000 W Main St",
+    "lat": 38.0323477,
+    "lng": -78.4952169
+  },
+  {
+    "street_address": "102 Shamrock Rd",
+    "lat": 38.0271627,
+    "lng": -78.5104864
+  },
+  {
+    "street_address": "1029 Wertland St",
+    "lat": 38.0352579,
+    "lng": -78.4953501
+  },
+  {
+    "street_address": "104 Stadium Rd",
+    "lat": 38.0317539,
+    "lng": -78.5084225
+  },
+  {
+    "street_address": "106 Montebello Cir",
+    "lat": 38.0290828,
+    "lng": -78.5098872
+  },
+  {
+    "street_address": "140 Valley Rd",
+    "lat": 38.0292952,
+    "lng": -78.5074904
+  },
+  {
+    "street_address": "142 Yellowstone Dr",
+    "lat": 38.016885,
+    "lng": -78.521789
+  },
+  {
+    "street_address": "1513 Virginia Ave",
+    "lat": 38.0385591,
+    "lng": -78.4990612
+  },
+  {
+    "street_address": "167 Yellowstone Dr",
+    "lat": 38.0174144,
+    "lng": -78.5213782
+  },
+  {
+    "street_address": "1718 Jefferson Park Ave",
+    "lat": 38.0292813,
+    "lng": -78.5090114
+  },
+  {
+    "street_address": "1720 Treetop Dr",
+    "lat": 38.0089513,
+    "lng": -78.5253098
+  },
+  {
+    "street_address": "1725 Jefferson Park Ave",
+    "lat": 38.0295418,
+    "lng": -78.5095765
+  },
+  {
+    "street_address": "1800 Jefferson Park Ave",
+    "lat": 38.028004,
+    "lng": -78.5084153
+  },
+  {
+    "street_address": "1801 Lambeth Ln",
+    "lat": 38.0410423,
+    "lng": -78.5017084
+  },
+  {
+    "street_address": "1819 Jefferson Park Ave",
+    "lat": 38.0282096,
+    "lng": -78.511092
+  },
+  {
+    "street_address": "1821 Jefferson Park Ave",
+    "lat": 38.0279937,
+    "lng": -78.5113328
+  },
+  {
+    "street_address": "1904 Jefferson Park Ave",
+    "lat": 38.0269326,
+    "lng": -78.5114629
+  },
+  {
+    "street_address": "1912 Lewis Mountain Rd",
+    "lat": 38.0374881,
+    "lng": -78.508744
+  },
+  {
+    "street_address": "1912 Stadium Rd",
+    "lat": 38.0288308,
+    "lng": -78.5138485
+  },
+  {
+    "street_address": "2006 Jefferson Park Ave",
+    "lat": 38.0262558,
+    "lng": -78.5130829
+  },
+  {
+    "street_address": "2006 Stadium Rd",
+    "lat": 38.028198,
+    "lng": -78.5151911
+  },
+  {
+    "street_address": "210 Montebello Cir",
+    "lat": 38.0302909,
+    "lng": -78.5093102
+  },
+  {
+    "street_address": "2101 Arlington Blvd",
+    "lat": 38.0498742,
+    "lng": -78.5065141
+  },
+  {
+    "street_address": "2101 Jefferson Park Ave",
+    "lat": 38.0265709,
+    "lng": -78.5138371
+  },
+  {
+    "street_address": "218 15th St NW",
+    "lat": 38.0356976,
+    "lng": -78.4993896
+  },
+  {
+    "street_address": "22904 NEWCOMB HALL",
+    "lat": 38.0340277,
+    "lng": -78.510016
+  },
+  {
+    "street_address": "2302 Price Ave",
+    "lat": 38.0269542,
+    "lng": -78.5168554
+  },
+  {
+    "street_address": "2715 S Norfolk St",
+    "lat": 37.5490558,
+    "lng": -122.2860791
+  },
+  {
+    "street_address": "300 Montebello Cir",
+    "lat": 38.0294392,
+    "lng": -78.5103976
+  },
+  {
+    "street_address": "301 15th St NW",
+    "lat": 38.0370113,
+    "lng": -78.4997976
+  },
+  {
+    "street_address": "313 13th St NW",
+    "lat": 38.0364752,
+    "lng": -78.4973477
+  },
+  {
+    "street_address": "416 Monroe Ln",
+    "lat": 38.0313794,
+    "lng": -78.5025293
+  },
+  {
+    "street_address": "429 Monroe Ln",
+    "lat": 38.0309554,
+    "lng": -78.5033588
+  },
+  {
+    "street_address": "450 N Mathilda Ave",
+    "lat": 37.3869302,
+    "lng": -122.0291259
+  },
+  {
+    "street_address": "524 Valley Rd",
+    "lat": 38.0292293,
+    "lng": -78.5055818
+  },
+  {
+    "street_address": "611 Rugby Rd",
+    "lat": 38.0429586,
+    "lng": -78.5001903
+  },
+  {
+    "street_address": "775 Alderman Rd",
+    "lat": 38.0312986,
+    "lng": -78.515666
+  },
+  {
+    "street_address": "814 Cabell Ave",
+    "lat": 38.0429617,
+    "lng": -78.4945737
+  },
+  {
+    "street_address": "852 W Main St",
+    "lat": 38.0320149,
+    "lng": -78.4933344
+  },
+  {
+    "street_address": "853 W Main St",
+    "lat": 38.0327768,
+    "lng": -78.493227
+  },
+  {
+    "street_address": "Charlottesville VA",
+    "lat": 38.0293059,
+    "lng": -78.4766781
+  }
+]

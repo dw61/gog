@@ -2,13 +2,20 @@ import React, { useState } from "react"
 import { createRoot } from "react-dom/client";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import apartments from "../static/apartments.json"
+import dataStatus from "../static/data-status.json"
+
+function dateLabel(value) {
+  return new Date(value).toLocaleDateString(undefined, {
+    year: "numeric", month: "short", day: "numeric", timeZone: "UTC"
+  });
+}
 
 function Highlight(props) {
   return (
     <div
       role="region"
       aria-label="Apartment details"
-      className="fixed bottom-4 right-4 left-4 lg:left-auto lg:top-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs overflow-y-auto font-sans">
+      className="fixed bottom-4 right-4 left-4 lg:left-auto lg:top-4 z-10 bg-white p-4 rounded-lg shadow-lg max-w-xs max-h-[calc(100dvh-8rem)] lg:max-h-[calc(100dvh-2rem)] overflow-y-auto font-sans">
       <div className="flex justify-end mb-2">
         <button
           type="button"
@@ -21,7 +28,9 @@ function Highlight(props) {
       </div>
       <div className="flex justify-between items-baseline">
         <h2 className="text-2xl font-semibold">${props.apartment.rent_per_person}</h2>
-        <span className="text-lg text-red-500 font-semibold">&#9734; {props.apartment.rating}({props.apartment.count})</span>
+        <span className="text-lg text-red-500 font-semibold">
+          {props.apartment.rating == null ? "Not rated" : `☆ ${props.apartment.rating}`} ({props.apartment.count})
+        </span>
       </div>
       <div className="flex flex-wrap gap-2 mt-2 text-xs font-semibold">
         <span className="text-gray-700 bg-orange-100 rounded-full px-2 py-1">
@@ -44,7 +53,7 @@ function Highlight(props) {
       </div>
       <div className="border-t border-gray-200 mt-3 pt-2">
         <p className="text-xs mb-2">Good to know</p>
-        <p className="text-xs text-gray-600">{props.apartment.comment}</p>
+        <p className="text-xs text-gray-600 whitespace-pre-line">{props.apartment.comment}</p>
       </div>
       <br />
       <div className="w-full text-center text-sm">
@@ -83,11 +92,21 @@ function Marker(props) {
 
 function App() {
 
-  let [apartment, setApartment] = useState(apartments[1])
+  let [apartment, setApartment] = useState(apartments[0])
   let [showHighlight, setShowHighlight] = useState(false)
 
   return (
     <>
+      <aside className="fixed top-3 left-3 z-10 rounded-lg bg-white p-3 shadow-lg font-sans text-xs max-w-[220px]" aria-label="Review data freshness">
+        <p className="font-semibold">GetOffGrounds</p>
+        <p>Latest review: <time dateTime={dataStatus.latest_review_at}>{dateLabel(dataStatus.latest_review_at)}</time></p>
+        <p className="text-gray-600">
+          {dataStatus.source === "fillout" && dataStatus.published_at
+            ? <>Map updated: <time dateTime={dataStatus.published_at}>{dateLabel(dataStatus.published_at)}</time></>
+            : "Archived reviews · automatic sync pending"}
+        </p>
+        <a href="/review/" className="inline-block mt-2 underline">Add your review</a>
+      </aside>
       {showHighlight &&
         <Highlight
           apartment={apartment}

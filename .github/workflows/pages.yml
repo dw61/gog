@@ -1,4 +1,4 @@
-name: Deploy static site to GitHub Pages
+name: Sync reviews and deploy GitHub Pages
 
 on:
   push:
@@ -6,32 +6,95 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Offset from the hour to avoid the busiest scheduler window.
+    - cron: '7,17,27,37,47,57 * * * *'
 
 permissions:
   contents: read
 
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
+    if: github.event_name != 'schedule' || vars.FILLOUT_SYNC_ENABLED == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      publish: ${{ steps.publish.outputs.enabled }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Queued runs must start from current main, including data committed by
+          # a previous sync, instead of deploying an older event snapshot.
+          ref: ${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test review processing
+        run: python -m unittest discover -s tests -v
+      - name: Check Fillout connection
+        id: connection
+        if: github.event_name != 'pull_request'
+        env:
+          FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ -n "$FILLOUT_API_KEY" ]; then
+            echo 'available=true' >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT_NAME" = 'schedule' ] || [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            echo '::error::Add the private FILLOUT_API_KEY repository secret before syncing.'
+            exit 1
+          else
+            echo 'available=false' >> "$GITHUB_OUTPUT"
+            echo 'Fillout is not connected yet; building the existing snapshot.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Fetch and validate completed reviews
+        id: sync
+        if: steps.connection.outputs.available == 'true'
+        env:
+          FILLOUT_API_KEY: ${{ secrets.FILLOUT_API_KEY }}
+        run: python scripts/sync_fillout.py
+      - name: Decide whether to publish
+        id: publish
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DATA_CHANGED: ${{ steps.sync.outputs.changed }}
+        run: |
+          if [ "$EVENT_NAME" != 'schedule' ] || [ "$DATA_CHANGED" = 'true' ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-node@v4
+        if: steps.publish.outputs.enabled == 'true'
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: map/package-lock.json
       - run: npm ci --prefix map
+        if: steps.publish.outputs.enabled == 'true'
       - run: npm run build --prefix map
+        if: steps.publish.outputs.enabled == 'true'
+      - name: Save only public review data
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add static/apartments.json static/data-status.json config/fillout.json
+          git commit -m 'Update published apartment reviews'
+          # A conflicting main update stops this run before deployment. The next
+          # scheduled run will retry from the latest main.
+          git push origin HEAD:main
       - uses: actions/upload-pages-artifact@v4
+        if: steps.publish.outputs.enabled == 'true'
         with:
           path: dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && needs.build.outputs.publish == 'true'
     needs: build
     runs-on: ubuntu-latest
     permissions:
